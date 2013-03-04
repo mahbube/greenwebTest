@@ -34,7 +34,9 @@ if( isset($_POST['register']) ){
 if( isset($_POST['login']) ){
 	$caching_enabled=false;
 	if( strlen($_POST['us'])>3 && strlen($_POST['ps'])>5 ){
-		$log_done=login_user($_POST['us'],$_POST['ps']);
+		$us=mysql_real_escape_string($_POST['us']);
+		$ps=mysql_real_escape_string($_POST['ps']);
+		$log_done=login_user($us,$ps);
 		if(!$log_done) 	$err_log="Invalid Username & Password" ;
 		else 	go2url( SITE_PATH.'internal/general.html');
 	}else{
